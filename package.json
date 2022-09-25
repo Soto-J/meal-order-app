@@ -1,5 +1,6 @@
 {
-  "name": "react-complete-guide",
+  "homepage": "http://soto-j.github.io/meal-order-app",
+  "name": "meal-order-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
