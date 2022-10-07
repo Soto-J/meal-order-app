@@ -9,6 +9,11 @@
   list-style: none;
 }
 
+.is-loading,
+.fetch-error {
+  text-align: center;
+}
+
 @keyframes meals-appear {
   from {
     opacity: 0;

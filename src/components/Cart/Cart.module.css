@@ -13,6 +13,10 @@
   margin: 1rem 0;
 }
 
+.submit-order p {
+  text-align: center;
+}
+
 .actions {
   text-align: right;
 }
