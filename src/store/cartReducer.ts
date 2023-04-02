@@ -36,7 +36,7 @@ export const cartReducer = (state: CartState, action: Action): CartState => {
       if (itemInCart) {
         updatedItems = [...state.items];
         itemInCart.quantity += itemToAdd.quantity;
-        updatedItems[indexOfExistingItem] = itemToAdd;
+        updatedItems[indexOfExistingItem] = itemInCart;
       } else {
         updatedItems = [...state.items, itemToAdd];
       }
