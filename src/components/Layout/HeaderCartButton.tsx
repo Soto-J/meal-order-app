@@ -24,9 +24,13 @@ function HeaderCartButton({ openCart, children }: HeaderCartButtonProps) {
 
     setBtnClicked(true);
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setBtnClicked(false);
     }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [items]);
 
   return (
