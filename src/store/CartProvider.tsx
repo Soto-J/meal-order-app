@@ -6,11 +6,13 @@ type CartProviderProps = {
   children?: ReactNode;
 };
 
+const defaultState = {
+  items: [],
+  totalPrice: 0,
+};
+
 function CartProvider({ children }: CartProviderProps) {
-  const [state, dispatch] = useReducer(cartReducer, {
-    items: [],
-    totalPrice: 0,
-  });
+  const [state, dispatch] = useReducer(cartReducer, defaultState);
 
   const addItemToCart = (item: Item) => {
     dispatch({ type: ActionType.ADD_ITEM_TO_CART, payload: item });
