@@ -13,7 +13,7 @@ type CartProps = {
 function Cart({ closeCart }: CartProps) {
   const { totalPrice, items, addItemToCart, removeItemFromCart } =
     useContext(CartContext);
-
+  const price = totalPrice.toFixed(2);
   const stateIsNotEmpty = items.length !== 0;
 
   const increment = (item: Item) => {
@@ -29,18 +29,14 @@ function Cart({ closeCart }: CartProps) {
       <ul className={classes["cart-items"]}>
         {items.map((item) => (
           <Fragment key={item.id}>
-            <CartItem
-              item={item}
-              onAdd={increment.bind(null, item)}
-              onRemove={decrement.bind(null, item.id)}
-            />
+            <CartItem item={item} onAdd={increment} onRemove={decrement} />
           </Fragment>
         ))}
       </ul>
 
       <div className={classes["total"]}>
         <span>Total Price</span>
-        <span>{`$${totalPrice.toFixed(2)}`}</span>
+        <span>{totalPrice.toFixed(2)}</span>
       </div>
 
       <div className={classes["actions"]}>
