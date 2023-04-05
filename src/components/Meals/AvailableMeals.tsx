@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Card from "../UI/Card";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem/MealItem";
@@ -34,11 +35,46 @@ const DUMMY_MEALS = [
 ];
 
 function AvailableMeals() {
+  const [data, setData] = useState(DUMMY_MEALS);
+
+  const sortData = (increase: string) => {
+    setData((state) => [
+      ...state.sort((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+
+        if (increase === "increase") {
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+        } else {
+          if (nameA > nameB) {
+            return -1;
+          }
+          if (nameA < nameB) {
+            return 1;
+          }
+        }
+
+        return 0;
+      }),
+    ]);
+  };
+
+  const onClickSortIncrease = () => sortData("increase");
+  const onClickSortDecrease = () => sortData("decrease");
+
   return (
     <section className={classes["meals"]}>
-      <Card>
+      <Card
+        onClickSortIncrease={onClickSortIncrease}
+        onClickSortDecrease={onClickSortDecrease}
+      >
         <ul>
-          {DUMMY_MEALS.map((item) => (
+          {data.map((item) => (
             <li key={item.id}>
               <MealItem meal={item} />
             </li>

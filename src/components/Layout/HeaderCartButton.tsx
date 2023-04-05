@@ -1,7 +1,7 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
 import CartContext from "../../store/cart-context";
-import { CartIcon } from "../Cart/CartIcon";
 import classes from "./HeaderCartButton.module.css";
+import { Cart } from "react-ionicons";
 
 type HeaderCartButtonProps = {
   children?: ReactNode;
@@ -39,7 +39,7 @@ function HeaderCartButton({ openCart, children }: HeaderCartButtonProps) {
       onClick={openCart}
     >
       <span className={classes["icon"]}>
-        <CartIcon />
+        <Cart color="#ffff" />
       </span>
       <span>{children}</span>
       <span className={classes["badge"]}>{numberOfItems}</span>

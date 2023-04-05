@@ -10,6 +10,7 @@
   align-items: center;
   border-radius: 25px;
   font-weight: bold;
+  margin-left: 2rem;
 }
 
 .button:hover,
@@ -20,7 +21,7 @@
 .icon {
   width: 1.35rem;
   height: 1.35rem;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 .badge {
@@ -40,9 +41,9 @@
   animation: bump 300ms ease-out;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 590px) {
   .button {
-    padding: .5rem 2.5rem;
+    padding: 0.5rem 2.5rem;
     margin-left: 1rem;
   }
 }

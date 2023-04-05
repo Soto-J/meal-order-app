@@ -14,7 +14,7 @@ function App() {
     <Fragment>
       <Header openCart={toggleCart} />
       {showCart && <Cart closeCart={toggleCart} />}
-
+      
       <main>
         <Meals />
       </main>

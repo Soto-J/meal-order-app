@@ -28,8 +28,8 @@
   transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
 
-@media (max-width: 540px) {
+@media (max-width: 550px) {
   .header {
-    padding: 0 5%;
+    padding: 0 4%;
   }
 }
