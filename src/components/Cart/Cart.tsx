@@ -1,8 +1,9 @@
 import { Fragment, ReactNode, useContext } from "react";
-import CartContext, { Item } from "../../store/cart-context";
+import CartContext, { Item } from "../../store/context/cart-context";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
+import CheckoutForm from "./CheckoutForm";
 
 type CartProps = {
   children?: ReactNode;
@@ -13,7 +14,7 @@ type CartProps = {
 function Cart({ closeCart }: CartProps) {
   const { totalPrice, items, addItemToCart, removeItemFromCart } =
     useContext(CartContext);
-  const price = totalPrice.toFixed(2);
+
   const stateIsNotEmpty = items.length !== 0;
 
   const increment = (item: Item) => {
@@ -48,6 +49,7 @@ function Cart({ closeCart }: CartProps) {
           <button className={classes["button"]}>Order</button>
         )}
       </div>
+      <CheckoutForm />
     </Modal>
   );
 }

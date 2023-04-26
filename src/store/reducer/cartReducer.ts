@@ -1,23 +1,11 @@
-import { Item } from "./cart-context";
+import { ActionType } from "../action-types";
+import { Action } from "../actions";
+import { Item } from "../context/cart-context";
 
 type CartState = {
   items: Item[];
   totalPrice: number;
 };
-
-export enum ActionType {
-  ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART",
-  REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART",
-}
-type AddItemToCartAction = {
-  type: ActionType.ADD_ITEM_TO_CART;
-  payload: Item;
-};
-type RemoveItemFromCartAction = {
-  type: ActionType.REMOVE_ITEM_FROM_CART;
-  payload: { id: string };
-};
-type Action = AddItemToCartAction | RemoveItemFromCartAction;
 
 export const cartReducer = (state: CartState, action: Action): CartState => {
   // used let because const variables presist in switch statements. **
@@ -31,12 +19,12 @@ export const cartReducer = (state: CartState, action: Action): CartState => {
         (item) => item.id === itemToAdd.id
       );
       const itemInCart = state.items[indexOfExistingItem];
-      
+
       // If item exist in state, update quantity otherwise add to state
       if (itemInCart) {
         updatedItems = [...state.items];
         itemInCart.quantity += itemToAdd.quantity;
-        
+
         updatedItems[indexOfExistingItem] = itemInCart;
       } else {
         updatedItems = [...state.items, itemToAdd];

@@ -43,7 +43,7 @@
 
 @media (max-width: 590px) {
   .button {
-    padding: 0.5rem 2.5rem;
+    padding: .5rem 1rem;
     margin-left: 1rem;
   }
 }

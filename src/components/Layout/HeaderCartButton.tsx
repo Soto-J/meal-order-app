@@ -1,5 +1,5 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
-import CartContext from "../../store/cart-context";
+import CartContext from "../../store/context/cart-context";
 import classes from "./HeaderCartButton.module.css";
 import { Cart } from "react-ionicons";
 

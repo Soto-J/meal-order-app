@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Item } from "../../store/cart-context";
+import { Item } from "../../store/context/cart-context";
 import classes from "./CartItem.module.css";
 
 type CartItemProps = {

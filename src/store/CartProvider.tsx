@@ -1,6 +1,7 @@
 import { ReactNode, useReducer } from "react";
-import CartContext, { Item } from "./cart-context";
-import { ActionType, cartReducer } from "./cartReducer";
+import CartContext, { Item } from "./context/cart-context";
+import { cartReducer } from "./reducer/cartReducer";
+import { ActionType } from "./action-types";
 
 type CartProviderProps = {
   children?: ReactNode;

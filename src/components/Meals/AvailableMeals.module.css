@@ -11,6 +11,24 @@
   padding: 0;
 }
 
+.meals-loading {
+  text-align: center;
+  color: white;
+  margin-top: 4rem;
+}
+
+.spinner {
+  margin: 5rem auto;
+  text-align: center;
+}
+
+.spinner svg {
+  height: 6rem;
+  width: 6rem;
+  fill: #fff;
+  animation: rotate 2s infinite linear;
+}
+
 @keyframes meals-appear {
   from {
     opacity: 0;
@@ -20,5 +38,15 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
