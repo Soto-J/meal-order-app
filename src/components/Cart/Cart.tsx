@@ -1,17 +1,19 @@
-import { Fragment, ReactNode, useContext } from "react";
+import { Fragment, ReactNode, useContext, useState } from "react";
 import CartContext, { Item } from "../../store/context/cart-context";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import CheckoutForm from "./CheckoutForm";
+import { Meal } from "../Meals/AvailableMeals";
 
 type CartProps = {
   children?: ReactNode;
 
-  closeCart(): void;
+  closeCart: () => void;
 };
 
 function Cart({ closeCart }: CartProps) {
+  const [showForm, setShowForm] = useState(false);
   const { totalPrice, items, addItemToCart, removeItemFromCart } =
     useContext(CartContext);
 
@@ -24,6 +26,24 @@ function Cart({ closeCart }: CartProps) {
   const decrement = (id: string) => {
     removeItemFromCart(id);
   };
+
+  const showFormHandler = () => {
+    setShowForm(true);
+  };
+
+  const onSubmit = (userData: Meal) => {};
+
+  const actionButtons = stateIsNotEmpty && !showForm && (
+    <div className={classes["actions"]}>
+      <button className={classes["button--alt"]} onClick={closeCart}>
+        Close
+      </button>
+
+      <button className={classes["button"]} onClick={showFormHandler}>
+        Order
+      </button>
+    </div>
+  );
 
   return (
     <Modal closeCart={closeCart}>
@@ -40,16 +60,9 @@ function Cart({ closeCart }: CartProps) {
         <span>{totalPrice.toFixed(2)}</span>
       </div>
 
-      <div className={classes["actions"]}>
-        <button className={classes["button--alt"]} onClick={closeCart}>
-          Close
-        </button>
+      {showForm && <CheckoutForm onSubmit={onSubmit} onCancel={closeCart} />}
 
-        {stateIsNotEmpty && (
-          <button className={classes["button"]}>Order</button>
-        )}
-      </div>
-      <CheckoutForm />
+      {actionButtons}
     </Modal>
   );
 }
