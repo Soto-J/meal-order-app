@@ -46,7 +46,7 @@ function CheckoutForm({ onSubmit, onCancel }: CheckoutFormProp) {
     if (!formIsValid) {
       return;
     }
-
+    // Po
     onSubmit({ name, street, postal, city });
   };
 

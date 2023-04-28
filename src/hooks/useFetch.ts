@@ -3,6 +3,7 @@ import { useEffect, useReducer, useRef } from "react";
 interface State<T> {
   data?: T;
   error?: Error;
+  isLoading: boolean;
 }
 type Cache<T> = { [url: string]: T };
 enum ActionType {
@@ -24,12 +25,14 @@ function useFetch<T = unknown>(url?: string, options?: RequestInit): State<T> {
   const initialState: State<T> = {
     error: undefined,
     data: undefined,
+    isLoading: false,
   };
 
   // state logic
   const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
       case ActionType.loading:
+        state.isLoading = !state.isLoading
         return { ...initialState };
       case ActionType.fetched:
         return { ...initialState, data: action.payload };

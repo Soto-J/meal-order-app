@@ -4,7 +4,6 @@ import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import CheckoutForm from "./CheckoutForm";
-import { Meal } from "../Meals/AvailableMeals";
 
 type CartProps = {
   children?: ReactNode;
@@ -31,7 +30,16 @@ function Cart({ closeCart }: CartProps) {
     setShowForm(true);
   };
 
-  const onSubmit = (userData: Meal) => {};
+  const onSubmit = (userData: any) => {
+    fetch(
+      "https://meal-order-app-30380-default-rtdb.firebaseio.com/orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify({ user: userData, orderedItems: items }),
+      }
+    );
+    console.log("SUBMIT");
+  };
 
   const actionButtons = stateIsNotEmpty && !showForm && (
     <div className={classes["actions"]}>
