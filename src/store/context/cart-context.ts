@@ -6,6 +6,7 @@ type TCartContext = {
 
   addItemToCart: (item: Item) => void;
   removeItemFromCart: (id: string) => void;
+  clearCart: () => void;
 };
 
 export type Item = {

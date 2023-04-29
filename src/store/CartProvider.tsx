@@ -15,13 +15,13 @@ const defaultState = {
 function CartProvider({ children }: CartProviderProps) {
   const [state, dispatch] = useReducer(cartReducer, defaultState);
 
-  const addItemToCart = (item: Item) => {
+  const addItemToCart = (item: Item) =>
     dispatch({ type: ActionType.ADD_ITEM_TO_CART, payload: item });
-  };
 
-  const removeItemFromCart = (id: string) => {
+  const removeItemFromCart = (id: string) =>
     dispatch({ type: ActionType.REMOVE_ITEM_FROM_CART, payload: { id } });
-  };
+
+  const clearCart = () => dispatch({ type: ActionType.CLEAR_CART });
 
   const cartContext = {
     items: state.items,
@@ -29,6 +29,7 @@ function CartProvider({ children }: CartProviderProps) {
 
     addItemToCart,
     removeItemFromCart,
+    clearCart,
   };
 
   return (

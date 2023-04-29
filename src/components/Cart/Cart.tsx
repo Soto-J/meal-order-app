@@ -13,8 +13,13 @@ type CartProps = {
 
 function Cart({ closeCart }: CartProps) {
   const [showForm, setShowForm] = useState(false);
-  const { totalPrice, items, addItemToCart, removeItemFromCart } =
+  const [isLoading, setIsLoading] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
+
+  const { totalPrice, items, addItemToCart, removeItemFromCart, clearCart } =
     useContext(CartContext);
+
+  const price = totalPrice.toFixed(2).replace("-0", "0"); // Avoid JS -0 value when removing items from cart
 
   const stateIsNotEmpty = items.length !== 0;
 
@@ -30,31 +35,23 @@ function Cart({ closeCart }: CartProps) {
     setShowForm(true);
   };
 
-  const onSubmit = (userData: any) => {
-    fetch(
+  const onSubmit = async (userData: any) => {
+    setIsLoading(true);
+    await fetch(
       "https://meal-order-app-30380-default-rtdb.firebaseio.com/orders.json",
       {
         method: "POST",
         body: JSON.stringify({ user: userData, orderedItems: items }),
       }
     );
-    console.log("SUBMIT");
+    setIsLoading(false);
+    setDidSubmit(true);
+
+    clearCart();
   };
 
-  const actionButtons = stateIsNotEmpty && !showForm && (
-    <div className={classes["actions"]}>
-      <button className={classes["button--alt"]} onClick={closeCart}>
-        Close
-      </button>
-
-      <button className={classes["button"]} onClick={showFormHandler}>
-        Order
-      </button>
-    </div>
-  );
-
-  return (
-    <Modal closeCart={closeCart}>
+  const cartModalContent = (
+    <Fragment>
       <ul className={classes["cart-items"]}>
         {items.map((item) => (
           <Fragment key={item.id}>
@@ -65,12 +62,35 @@ function Cart({ closeCart }: CartProps) {
 
       <div className={classes["total"]}>
         <span>Total Price</span>
-        <span>{totalPrice.toFixed(2)}</span>
+        <span>${price}</span>
       </div>
 
       {showForm && <CheckoutForm onSubmit={onSubmit} onCancel={closeCart} />}
 
-      {actionButtons}
+      {/* Action Buttons - Hide when cart is empty */}
+      {stateIsNotEmpty && !showForm && (
+        <div className={classes["actions"]}>
+          <button className={classes["button--alt"]} onClick={closeCart}>
+            Close
+          </button>
+
+          <button className={classes["button"]} onClick={showFormHandler}>
+            Order
+          </button>
+        </div>
+      )}
+    </Fragment>
+  );
+
+  const isLoadingContent = <p>Sending order data...</p>;
+
+  const didSubmitContent = <h2>Succesfully completed order!</h2>;
+
+  return (
+    <Modal closeCart={closeCart}>
+      {isLoading && !didSubmit && isLoadingContent}
+      {!isLoading && !didSubmit && cartModalContent}
+      {!isLoading && didSubmit && didSubmitContent}
     </Modal>
   );
 }

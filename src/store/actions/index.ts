@@ -11,4 +11,11 @@ type RemoveItemFromCartAction = {
   payload: { id: string };
 };
 
-export type Action = AddItemToCartAction | RemoveItemFromCartAction;
+type ClearCartAction = {
+  type: ActionType.CLEAR_CART;
+};
+
+export type Action =
+  | AddItemToCartAction
+  | RemoveItemFromCartAction
+  | ClearCartAction;

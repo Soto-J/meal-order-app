@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Card from "../UI/Card";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem/MealItem";
-import Icons from "../../assets/icons.svg";
 
 type Meal = {
   id: string;
